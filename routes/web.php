@@ -15,12 +15,19 @@ Route::get('/', function() {
     return view('welcome');
 });
 
-Route::get('/peliculas', 'PeliculasController@index');
 
-Route::get('/peliculas/{id}', 'PeliculasController@buscarPeliculaId');
+Route::get('/movies', 'MoviesController@index');
 
-Route::get('/peliculas/buscar/{nombre}', 'PeliculasController@buscarPeliculaNombre');
+Route::get('/movies/{id}', 'MoviesController@show');
 
-Route::get('/agregarPelicula', 'PeliculasController@agregarPelicula');
+Route::get('/movies/search/{title}', 'MoviesController@search');
 
-Route::post('/agregarPelicula', 'PeliculasController@agregarPelicula');
+Route::get('/addMovie', 'MoviesController@addMovie');
+
+Route::post('/addMovie', 'MoviesController@addMovie');
+
+Route::get('/actors', 'ActorController@index');
+
+Route::get('/actors/{id}', 'ActorController@show');
+
+Route::get('/actors/search/{name}', 'ActorController@search');

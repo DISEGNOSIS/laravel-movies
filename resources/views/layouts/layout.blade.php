@@ -7,6 +7,10 @@
     <title>@yield('titulo')</title>
 </head>
 <body>
-    @yield('contenido')
+    <header>
+    </header>
+    <section>
+        @yield('contenido')
+    </section>
 </body>
 </html>

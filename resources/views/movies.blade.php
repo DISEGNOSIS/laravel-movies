@@ -5,16 +5,17 @@
 @endsection
 
 @section('contenido')
+    {{-- CLASE 01:
     @if(isset($id))
-        @if($id <= (count($peliculas)))
-            {{ $peliculas[$id] }}
+        @if($id <= (count($movies)))
+            {{ $movies[$id] }}
         @else
            {{ 'No se encontraron resultados.' }}
-        @endif
-    @elseif(!empty($peliculas))
+        @endif --}}
+    @if(!$movies[0]==null)
         <ul>
-        @foreach($peliculas as $pelicula)
-            <li>{{ $pelicula }}</li>
+        @foreach($movies as $movie)
+            <li>{{ $movie->title }}</li>
         @endforeach
         </ul>
     @else

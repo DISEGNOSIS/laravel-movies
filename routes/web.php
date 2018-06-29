@@ -18,16 +18,20 @@ Route::get('/', function() {
 
 Route::get('/movies', 'MoviesController@index');
 
+Route::get('/movies/search', 'MoviesController@search');
+
 Route::get('/movies/{id}', 'MoviesController@show');
 
-Route::get('/movies/search/{title}', 'MoviesController@search');
+Route::get('/movie/add', 'MoviesController@add');
 
-Route::get('/addMovie', 'MoviesController@addMovie');
-
-Route::post('/addMovie', 'MoviesController@addMovie');
+Route::post('/movie/add', 'MoviesController@store');
 
 Route::get('/actors', 'ActorController@index');
 
+Route::get('/actors/search', 'ActorController@search');
+
 Route::get('/actors/{id}', 'ActorController@show');
 
-Route::get('/actors/search/{name}', 'ActorController@search');
+Route::get('/actors/add', 'ActorController@add');
+
+Route::post('/actors/add', 'ActorController@store');

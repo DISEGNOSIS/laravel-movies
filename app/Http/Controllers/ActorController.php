@@ -11,11 +11,12 @@ class ActorController extends Controller
         return view('actors', compact("actors"));
     }
     public function show($id) {
-        $actors = [\App\Actor::find($id)];
-        return view('actors', compact("actors"));
+        $actor = \App\Actor::find($id);
+        return view('actor', compact("actor"));
     }
-    public function search($name) {
-        $actors = \App\Movie::where('title', 'LIKE', '%'.$name.'%')->get();
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $actors = \App\Actor::where('first_name', 'LIKE', '%'. $query .'%')->get();
         return view('actors', compact("actors"));
     }
 }

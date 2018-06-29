@@ -24,7 +24,7 @@ class MoviesController extends Controller
     }
 
     public function show($id) {
-        $movies = [\App\Movie::find($id)];
+        $movies = \App\Movie::find($id);
         return view('movies', compact("movies"));
         /*  CLASE 01:
         $parametros = [
@@ -34,8 +34,9 @@ class MoviesController extends Controller
         return view('peliculas', $parametros); */
     }
 
-    public function search($title) {
-        $movies = \App\Movie::where('title', 'LIKE', '%'.$title.'%')->get();
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $movies = \App\Movie::where('title', 'LIKE', '%'. $query .'%')->get();
         return view('movies', compact("movies"));
         /* CLASE 01:
         $mensaje = [];
@@ -50,11 +51,27 @@ class MoviesController extends Controller
         return $mensaje; */
     }
 
-    public function addMovie() {
-        if($_POST) {
-            return "Película agregada con éxito.";
-        } else {
-            return view('nuevaPelicula'); 
-        }
+    public function add() {
+        return view('addMovie');
+    }
+
+    public function store(Request $request) {
+        $this->validate($request, [
+            'title' => 'required|unique:movies|max:255',
+            'rating' => 'required|numeric',
+            'awards' => 'required|numeric',
+            'length' => 'numeric',
+            'day' => 'numeric',
+            'month' => 'numeric',
+            'year' => 'numeric'
+        ]);
+        $movie = \App\Movie::create([
+            'title' => $request->input('title'),
+            'rating' => $request->input('rating'),
+            'awards' => $request->input('awards'),
+            'length' => $request->input('length'),
+            'release_date' => $request->input('year') . '-' . $request->input('month') . '-' . $request->input('day')
+        ]);
+        return view('movie', compact('movie'));
     }
 }

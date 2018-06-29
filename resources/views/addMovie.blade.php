@@ -1,49 +1,57 @@
 @extends('layouts.layout')
 
-@section('titulo')
+@section('title')
     Agregar Película
 @endsection
 
-@section('contenido')
+@section('content')
+    @if(count($errors) > 0)
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    @endif
+
     <form id="agregarPelicula" name="agregarPelicula" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        {{ csrf_field() }}
         <div>
-            <label for="titulo">Título</label>
-            <input type="text" name="titulo" id="titulo"/>
+            <label for="title">Título</label>
+            <input type="text" name="title" id="title" value="{{ old('title') }}"/>
         </div>
         <div>
             <label for="rating">Rating</label>
-            <input type="text" name="rating" id="rating"/>
+            <input type="text" name="rating" id="rating" value="{{ old('rating') }}"/>
         </div>
         <div>
-            <label for="premios">Premios</label>
-            <input type="text" name="premios" id="premios"/>
+            <label for="awards">Premios</label>
+            <input type="text" name="awards" id="awards" value="{{ old('awards') }}"/>
         </div>
         <div>
-            <label for="duracion">Duración</label>
-            <input type="text" name="duracion" id="duracion"/>
+            <label for="length">Duración</label>
+            <input type="text" name="length" id="length" value="{{ old('length') }}"/>
         </div>
         <div>
             <label>Fecha de Estreno</label>
-            <select name="dia">
+            <select name="day">
                 <option value="">Dia</option>
-                <?php for ($i=1; $i < 32; $i++) { ?>
-                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                <?php } ?>
+                @for ($i=1; $i < 32; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
             </select>
-            <select name="mes">
+            <select name="month">
                 <option value="">Mes</option>
-                <?php for ($i=1; $i < 13; $i++) { ?>
-                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                <?php } ?>
+                @for ($i=1; $i < 13; $i++) { ?>
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
             </select>
-            <select name="anio">
+            <select name="year">
                 <option value="">Año</option>
-                <?php for ($i=2018; $i > 1900; $i--) { ?>
-                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                <?php } ?>
+                @for ($i=2018; $i > 1900; $i--) { ?>
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
             </select>
         </div>
-        <input type="submit" value="Agregar Película" name="submit"/>
+        <button type="submit" />Agregar Película</button>
     </form>
 @endsection

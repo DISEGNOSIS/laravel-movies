@@ -16,7 +16,7 @@ class MoviesController extends Controller
     ]; */
 
     public function index() {
-        $movies = \App\Movie::all();
+        $movies = \App\Movie::paginate(15);
         return view('movies', compact("movies"));
         /* CLASE 01:
         $parametros = ["peliculas" => $this->peliculas];
@@ -24,8 +24,8 @@ class MoviesController extends Controller
     }
 
     public function show($id) {
-        $movies = \App\Movie::find($id);
-        return view('movies', compact("movies"));
+        $movie = \App\Movie::find($id);
+        return view('movie', compact("movie"));
         /*  CLASE 01:
         $parametros = [
             "peliculas" => $this->peliculas,
@@ -52,12 +52,14 @@ class MoviesController extends Controller
     }
 
     public function add() {
-        return view('addMovie');
+        $genres = \App\Genre::all();
+        return view('addMovie', compact('genres'));
     }
 
     public function store(Request $request) {
         $this->validate($request, [
             'title' => 'required|unique:movies|max:255',
+            'genre_id' => 'numeric',
             'rating' => 'required|numeric',
             'awards' => 'required|numeric',
             'length' => 'numeric',
@@ -67,6 +69,7 @@ class MoviesController extends Controller
         ]);
         $movie = \App\Movie::create([
             'title' => $request->input('title'),
+            'genre_id' => $request->input('genre'),
             'rating' => $request->input('rating'),
             'awards' => $request->input('awards'),
             'length' => $request->input('length'),

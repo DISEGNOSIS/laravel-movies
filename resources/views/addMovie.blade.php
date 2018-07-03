@@ -14,10 +14,19 @@
     @endif
 
     <form id="agregarPelicula" name="agregarPelicula" method="POST">
-        {{ csrf_field() }}
+        {{ csrf_field()}}
         <div>
             <label for="title">Título</label>
             <input type="text" name="title" id="title" value="{{ old('title') }}"/>
+        </div>
+        <div>
+            <label for="rating">Género</label>
+            <select name="genre" id="genre">
+                <option disabled selected>Elegir el género</option>
+                @foreach($genres as $genre)
+                    <option value="{{ $genre->id }}">{{ $genre->name }}</value>
+                @endforeach
+            </select>
         </div>
         <div>
             <label for="rating">Rating</label>

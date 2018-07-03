@@ -13,8 +13,11 @@
            {{ 'No se encontraron resultados.' }}
         @endif --}}
     @if($movie != null)
+        <h1>{{ $movie->title }}</h1>
         <ul>
-            <li>{{ $movie->title }}</li>
+            @foreach($movie->actors as $actor)
+                <li>{{ $actor->getName() }}</li>
+            @endforeach
         </ul>
     @else
         <p>No se encontraron resultados.</p>

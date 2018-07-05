@@ -17,7 +17,7 @@
         <h2>Películas:</h2>
         <ul>
         @foreach($genre->movies as $movie)
-            <li><a href="/movie/{{ $movie->id }}">{{ $movie->title }}</a></li>
+            <li><a href="/movies/{{ $movie->id }}">{{ $movie->title }}</a></li>
         @endforeach
         </ul>
     @else

@@ -14,11 +14,19 @@
         @endif --}}
     @if($movie != null)
         <h1>{{ $movie->title }}</h1>
+        <p>ID: {{ $movie->id }}</p>
+        <p>Género: {{ $movie->genre ? $movie->genre->name: 'not defined' }}
+        <p>Premios: {{ $movie->awards }}</p>
+        <p>Duración: {{ $movie->length }}</p>
         <ul>
+            <h2>Actores:</h2>
             @foreach($movie->actors as $actor)
-                <li>{{ $actor->getName() }}</li>
+                <li><a href="/actors/{{ $actor->id }}">{{ $actor->getName() }}</a></li>
             @endforeach
         </ul>
+        <div>
+            <h2>Poster:</h2>
+            <img src="{{ $movie->poster }}" alt="{{ $movie->title }}" />
     @else
         <p>No se encontraron resultados.</p>
     @endif

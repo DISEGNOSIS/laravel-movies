@@ -12,6 +12,12 @@
         <p>ID: {{ $actor->id }}</p>
         <p>Rating: {{ $actor->rating }}</p>
         {{-- <li>{{ $actor[0]->favourite_movie_id }}</li> --}}
+        <ul>
+            <h2>Películas:</h2>
+            @foreach($actor->movies as $movie)
+                <li><a href="/movies/{{ $movie->id }}">{{ $movie->title }}</a></li>
+            @endforeach
+        </ul>
     @else
         <p>No se encontraron resultados.</p>
     @endif

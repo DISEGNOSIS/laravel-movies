@@ -13,14 +13,14 @@
     </ul>
     @endif
 
-    <form id="agregarPelicula" name="agregarPelicula" method="POST">
+    <form id="agregarPelicula" name="agregarPelicula" method="POST" enctype="multipart/form-data">
         {{ csrf_field()}}
         <div>
             <label for="title">Título</label>
             <input type="text" name="title" id="title" value="{{ old('title') }}"/>
         </div>
         <div>
-            <label for="rating">Género</label>
+            <label for="genre">Género</label>
             <select name="genre" id="genre">
                 <option disabled selected>Elegir el género</option>
                 @foreach($genres as $genre)
@@ -60,6 +60,10 @@
                     <option value="{{ $i }}">{{ $i }}</option>
                 @endfor
             </select>
+        </div>
+        <div>
+            <label for="poster">Poster</label>
+            <input type="file" name="poster" id="poster"/>
         </div>
         <button type="submit" />Agregar Película</button>
     </form>

@@ -67,7 +67,18 @@ class MoviesController extends Controller
             'month' => 'numeric',
             'year' => 'numeric'
         ]);
-        $movie = \App\Movie::create([
+        /* GUARDA DIRECTO EN LA DB:*/
+        /* $movie = \App\Movie::create([
+            'title' => $request->input('title'),
+            'genre_id' => $request->input('genre'),
+            'rating' => $request->input('rating'),
+            'awards' => $request->input('awards'),
+            'length' => $request->input('length'),
+            'release_date' => $request->input('year') . '-' . $request->input('month') . '-' . $request->input('day')
+        ]); */
+
+        // INSTACIA Y DESPUÉS CON SAVE() SE GUARDA:
+        $movie = new \App\Movie([
             'title' => $request->input('title'),
             'genre_id' => $request->input('genre'),
             'rating' => $request->input('rating'),
@@ -75,6 +86,16 @@ class MoviesController extends Controller
             'length' => $request->input('length'),
             'release_date' => $request->input('year') . '-' . $request->input('month') . '-' . $request->input('day')
         ]);
+        $path = $request->file('poster')->storePublicly('public/poster');
+        $movie->poster = str_replace('public', '/storage', $path);
+        $movie->save();
+
         return view('movie', compact('movie'));
+    }
+
+    public function edit($id) {
+        $movie = \App\Movie::find($id);
+        $movie->title = "Nuevo Título";
+        $movie->save();
     }
 }

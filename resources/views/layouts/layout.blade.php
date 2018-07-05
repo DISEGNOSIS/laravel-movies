@@ -12,7 +12,9 @@
         @yield('search')
     </header>
     <section>
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </section>
 </body>
 </html>

@@ -20,16 +20,16 @@ Route::get('/movies', 'MoviesController@index');
 
 Route::get('/movies/search', 'MoviesController@search');
 
-Route::get('/movie/add', 'MoviesController@add');
+Route::get('/movies/add', 'MoviesController@add');
 
-Route::post('/movie/add', 'MoviesController@store');
+Route::post('/movies/add', 'MoviesController@store');
 
-Route::get('/movie/{id}', 'MoviesController@show');
+Route::get('/movies/{id}', 'MoviesController@show');
 
 
 Route::get('/genres', 'GenreController@index');
 
-Route::get('/genre/{id}', 'GenreController@show');
+Route::get('/genres/{id}', 'GenreController@show');
 
 
 Route::get('/actors', 'ActorController@index');
@@ -50,4 +50,15 @@ Route::get('/collection', function() {
         "nombre4" => "guada"
     ];
     return view('collection', ["nombres" => collect($nombres)]);
+});
+
+Route::get('/explode', function() {
+    $nombres = "Mariela, Rosa, Romi, Guada";
+    var_dump(explode(',', $nombres));
+});
+
+Route::get('/implode', function() {
+    $nombres = ["Mariela", "Rosa", "Romi", "Guada"];
+    var_dump($nombres);
+    echo implode(' | ', $nombres);
 });

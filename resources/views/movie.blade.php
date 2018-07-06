@@ -15,7 +15,7 @@
     @if($movie != null)
         <h1>{{ $movie->title }}</h1>
         <p>ID: {{ $movie->id }}</p>
-        <p>Género: {{ $movie->genre ? $movie->genre->name: 'not defined' }}
+        <p>Género: <a href="/genres/{{ $movie->genre ? $movie->genre->id : '' }}">{{ $movie->genre ? $movie->genre->name : 'not defined' }}</a></p>
         <p>Premios: {{ $movie->awards }}</p>
         <p>Duración: {{ $movie->length }}</p>
         <ul>

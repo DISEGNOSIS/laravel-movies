@@ -16,16 +16,19 @@ Route::get('/', function() {
 });
 
 
-Route::get('/movies', 'MoviesController@index');
+Route::prefix('movies')->middleware('movies')->name('movies')->group(function() {
 
-Route::get('/movies/search', 'MoviesController@search');
+    Route::get('/', 'MoviesController@index');
 
-Route::get('/movies/add', 'MoviesController@add');
+    Route::get('/search', 'MoviesController@search');
 
-Route::post('/movies/add', 'MoviesController@store');
+    Route::get('/add', 'MoviesController@add');
 
-Route::get('/movies/{id}', 'MoviesController@show');
+    Route::post('/add', 'MoviesController@store');
 
+    Route::get('/{id}', 'MoviesController@show');
+
+});
 
 Route::get('/genres', 'GenreController@index');
 
@@ -62,3 +65,16 @@ Route::get('/implode', function() {
     var_dump($nombres);
     echo implode(' | ', $nombres);
 });
+
+Auth::routes();
+
+Route::get('registracion', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('registracion', 'Auth\RegisterController@register');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/dashboard', function() {
+    echo "Bienvenido " . Auth::user()->name;
+})->middleware('auth');
+
+Route::get('/users/edit', 'UsersController@update');

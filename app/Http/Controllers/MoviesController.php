@@ -15,6 +15,10 @@ class MoviesController extends Controller
         6 => "Mary and Max"
     ]; */
 
+    public function __construct() {
+        //$this->middleware('admin');
+    }
+
     public function index() {
         $movies = \App\Movie::paginate(15);
         return view('movies', compact("movies"));
@@ -52,11 +56,15 @@ class MoviesController extends Controller
     }
 
     public function add() {
+        //$this->middleware('admin');
+
         $genres = \App\Genre::all();
         return view('addMovie', compact('genres'));
     }
 
     public function store(Request $request) {
+        //$this->middleware('admin');
+
         $this->validate($request, [
             'title' => 'required|unique:movies|max:255',
             'genre_id' => 'numeric',
@@ -78,7 +86,7 @@ class MoviesController extends Controller
         ]); */
 
         // INSTACIA Y DESPUÉS CON SAVE() SE GUARDA:
-        $movie = new \App\Movie([
+        $movie = new \App\Movie ([
             'title' => $request->input('title'),
             'genre_id' => $request->input('genre'),
             'rating' => $request->input('rating'),

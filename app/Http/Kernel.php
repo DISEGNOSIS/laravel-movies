@@ -36,6 +36,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        
+        'movies' => [
+            'admin' =>  \App\Http\Middleware\IsAdmin::class,
+        ],
 
         'api' => [
             'throttle:60,1',
@@ -59,5 +63,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin' =>  \App\Http\Middleware\IsAdmin::class,
     ];
 }

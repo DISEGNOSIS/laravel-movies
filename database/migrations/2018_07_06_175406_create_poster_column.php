@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropRatingColumn extends Migration
+class CreatePosterColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class DropRatingColumn extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-            //$table->dropColumn('rating');
+            $table->string('poster');
         });
     }
 
@@ -26,7 +26,7 @@ class DropRatingColumn extends Migration
     public function down()
     {
         Schema::table('movies', function (Blueprint $table) {
-            //$table->decimal('rating', 3, 1)->after('title');
+            $table->dropColumn('poster');
         });
     }
 }

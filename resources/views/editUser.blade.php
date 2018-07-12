@@ -5,8 +5,6 @@
 @endsection
 
 @section('content')
-{{ dd($user); }}
-
     @if(count($errors) > 0)
     <ul>
         @foreach ($errors->all() as $error)
@@ -19,19 +17,19 @@
         @csrf
         <div>
             <label for="name">Nombre</label>
-            <input type="text" name="name" id="name" value="{{ {{-- Auth::user->name ? Auth::user->name : --}} old('name') }}"/>
+            <input type="text" name="name" id="name" value="{{ Auth::user() ? Auth::user()->name : old('name') }}"/>
         </div>
         <div>
-            <label for="rating">Rating</label>
-            <input type="text" name="rating" id="rating" value="{{ old('rating') }}"/>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="{{  Auth::user() ? Auth::user()->email : old('email') }}"/>
         </div>
         <div>
-            <label for="awards">Premios</label>
-            <input type="text" name="awards" id="awards" value="{{ old('awards') }}"/>
+            <label for="pass">Password</label>
+            <input type="text" name="pass" id="pass" value="{{ old('pass') }}"/>
         </div>
         <div>
-            <label for="length">Duración</label>
-            <input type="text" name="length" id="length" value="{{ old('length') }}"/>
+            <label for="dni">DNI</label>
+            <input type="text" name="dni" id="dni" value="{{ Auth::user() ? Auth::user()->dni :  old('dni') }}"/>
         </div>
 
         <button type="submit" />Guardar</button>

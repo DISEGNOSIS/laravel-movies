@@ -16,3 +16,19 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/saludar', function() {
+    return response()->json([
+        "Hola" => "Guada"
+    ]);
+});
+
+Route::get('/directors', function() {
+    $actors = \App\Actor::all();
+    return response()->json($actors);
+});
+
+Route::get('/movies', function() {
+    $movies = \App\Movie::all();
+    return response()->json($movies);
+});

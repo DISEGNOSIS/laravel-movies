@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Ixudra\Curl\Facades\Curl;
+use Route;
 
 class MoviesController extends Controller
 {
@@ -20,7 +22,12 @@ class MoviesController extends Controller
     }
 
     public function index() {
-        $movies = \App\Movie::paginate(15);
+        //$movies = Curl::to('http://localhost:8000/api/movies')->get();
+        $pedido = Request::create('/api/movies', 'get');
+        $respuesta = Route::dispatch($pedido);
+        $movies = json_decode($respuesta->content(), true);
+        //dd($movies);
+        //$movies = \App\Movie::paginate(15);
         return view('movies', compact("movies"));
         /* CLASE 01:
         $parametros = ["peliculas" => $this->peliculas];
